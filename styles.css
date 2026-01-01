@@ -16,6 +16,14 @@
     --discourse-low: #383838;
 }
 
+.discourse-post[data-theme="light"] {
+    --discourse-primary: #000;
+    --discourse-secondary: #fff;
+    --discourse-medium: #919191;
+    --discourse-high: #222;
+    --discourse-low: #e9e9e9;
+}
+
 * {
     margin: 0;
     padding: 0;
@@ -81,6 +89,31 @@ body {
 
 .field--wide {
     grid-column: span 2;
+}
+
+.theme-toggle {
+    display: flex;
+    gap: 4px;
+    background: var(--color-input);
+    border: 1px solid var(--color-border);
+    border-radius: 8px;
+    padding: 4px;
+}
+
+.theme-toggle__btn {
+    padding: 8px 12px;
+    border: none;
+    border-radius: 6px;
+    background: transparent;
+    color: var(--color-text-muted);
+    font-size: 0.8rem;
+    font-weight: 500;
+    cursor: pointer;
+}
+
+.theme-toggle__btn--active {
+    background: var(--color-border);
+    color: var(--color-white);
 }
 
 .field__label {

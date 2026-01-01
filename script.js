@@ -16,6 +16,8 @@ const el = {
     copyBtn: null,
     copyText: null,
     downloadBtn: null,
+    themeDark: null,
+    themeLight: null,
 };
 
 function init() {
@@ -32,6 +34,8 @@ function init() {
     el.copyBtn = $('copy-btn');
     el.copyText = $('copy-text');
     el.downloadBtn = $('download-btn');
+    el.themeDark = $('theme-dark');
+    el.themeLight = $('theme-light');
 
     el.avatarPreview.src = DEFAULT_AVATAR;
     el.previewAvatar.src = DEFAULT_AVATAR;
@@ -42,6 +46,14 @@ function init() {
     el.content.addEventListener('input', updatePreview);
     el.copyBtn.addEventListener('click', copyImage);
     el.downloadBtn.addEventListener('click', downloadImage);
+    el.themeDark.addEventListener('click', () => setTheme('dark'));
+    el.themeLight.addEventListener('click', () => setTheme('light'));
+}
+
+function setTheme(theme) {
+    el.postPreview.dataset.theme = theme;
+    el.themeDark.classList.toggle('theme-toggle__btn--active', theme === 'dark');
+    el.themeLight.classList.toggle('theme-toggle__btn--active', theme === 'light');
 }
 
 function handleAvatarUpload(e) {
@@ -63,7 +75,8 @@ function updatePreview() {
 }
 
 async function generateCanvas() {
-    return html2canvas(el.postPreview, { backgroundColor: '#0c0c0c', scale: 2 });
+    const bg = el.postPreview.dataset.theme === 'light' ? '#fff' : '#0c0c0c';
+    return html2canvas(el.postPreview, { backgroundColor: bg, scale: 2 });
 }
 
 function flash(text, duration = 1500) {
